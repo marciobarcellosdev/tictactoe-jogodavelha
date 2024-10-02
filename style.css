@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap');
+
+body {
+    font-family: "Overpass", sans-serif;
+    font-size: 20px;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    margin: auto;
+    width: 90%;
+    
+  }
+  
+  table {
+    font-size: 60px;
+    border: 2px solid;
+    border-collapse: collapse;
+    width: 300px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  td {
+    border: 2px solid;
+    width: 100px;
+    height: 100px;
+  }
+
+  azul{
+    color: blue;
+
+  }
+
+  vermelho{
+    color: red;
+  }
+
+  .titulo{
+    font-family: "Spicy Rice", serif;
+    font-size: 50px;
+    font-weight: 400;
+    font-style: normal;
+  }
+
