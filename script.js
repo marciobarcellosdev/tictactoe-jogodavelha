@@ -17,21 +17,65 @@ function GetText(cell) {
 
 }
 
-// desativar click
-// reset table cell values
+// alinhar tudo center
+// validar quando ganha
 
-function EmptyTable() {
-  console.log('teste');
-
-
-
-  //document.getElementById("btnRestart").disabled = true;
-}
-
-function ValidateEmptyMatrix(value) {
-  if (value === 9){
-    document.getElementById("btnRestart").disabled = false;
+function SetPlayer() {
+  if(!jogador1jogar && !jogador2jogar){
+    jogador1jogar = true;
   }
+  else if(jogador1jogar && !jogador2jogar){
+    jogador2jogar = true;
+    jogador1jogar = false;
+  }
+  else if(jogador2jogar && !jogador1jogar){
+    jogador1jogar = true;
+    jogador2jogar = false;
+  }
+}
+function ValidatePlayerText() {
+  if(jogador1jogar && !jogador2jogar) return '<azul>x</azul>';
+  else if(jogador2jogar && !jogador1jogar) return '<vermelho>o</vermelho>';
+}
+function ValidatePlayerTurn() {
+  if(jogador2jogar && !jogador1jogar) return '<azul>jogador 1 [X]</azul>';
+  else if(jogador1jogar && !jogador2jogar) return '<vermelho>jogador 2 [O]</vermelho>';
+}
+function EmptyTable() {
+  for (var i = 1; i < 10; i++) {
+    const tdElem = document.getElementById("celula" + i);
+    tdElem.innerHTML = '';
+  }
+
+  SetPlayer();
+  var elementatual = document.getElementById('jogadoratual');
+  elementatual.innerHTML = ValidatePlayerTurn();
+
+  matriz = [ [vx,vx,vx],[vx,vx,vx],[vx,vx,vx] ];
+  PrintEmptyMatrix();
+
+  var elementlog = document.getElementById('log');
+  elementlog.innerHTML = '';
+
+  document.getElementById("btnRestart").disabled = true;
+  countcheia = 0;
+}
+function PrintEmptyMatrix() {
+  var elementmatriz = document.getElementById('matriz');
+  elementmatriz.innerHTML = '';
+  for (var lin = 0; lin < 3; lin++) {
+    elementmatriz.innerHTML += '<br>';
+    for (var col = 0; col < 3; col++) {
+      elementmatriz.innerHTML += matriz[lin][col] + ' ';
+    }
+  }
+  elementmatriz.innerHTML += '<br><br>'; 
+}
+function GenerateLog(cell) {
+  var atual;
+  if(jogador2jogar && !jogador1jogar) atual = '<vermelho>jogador 2 [O]</vermelho>';
+  else if(jogador1jogar && !jogador2jogar) atual = '<azul>jogador 1 [X]</azul>';
+  return '<br>' + atual + ' jogou na ' + cell;
 }
 function UpdateMatrix(cell, value) {
   switch(cell) {
@@ -74,40 +118,10 @@ function UpdateMatrix(cell, value) {
     default:
       // code block
   }
-  var elementmatriz = document.getElementById('matriz');
-  elementmatriz.innerHTML = '';
-  for (var lin = 0; lin < 3; lin++) {
-    elementmatriz.innerHTML += '<br>';
-    for (var col = 0; col < 3; col++) {
-      elementmatriz.innerHTML += matriz[lin][col] + ' ';
-    }
-  }
-  elementmatriz.innerHTML += '<br><br>';
+  PrintEmptyMatrix();
 }
-function GenerateLog(cell) {
-  var atual;
-  if(jogador2jogar && !jogador1jogar) atual = '<vermelho>jogador 2 [O]</vermelho>';
-  else if(jogador1jogar && !jogador2jogar) atual = '<azul>jogador 1 [X]</azul>';
-  return '<br>' + atual + ' jogou na ' + cell;
-}
-function SetPlayer() {
-  if(!jogador1jogar && !jogador2jogar){
-    jogador1jogar = true;
+function ValidateEmptyMatrix(value) {
+  if (value === 9){
+    document.getElementById("btnRestart").disabled = false;
   }
-  else if(jogador1jogar && !jogador2jogar){
-    jogador2jogar = true;
-    jogador1jogar = false;
-  }
-  else if(jogador2jogar && !jogador1jogar){
-    jogador1jogar = true;
-    jogador2jogar = false;
-  }
-}
-function ValidatePlayerText() {
-  if(jogador1jogar && !jogador2jogar) return '<azul>x</azul>';
-  else if(jogador2jogar && !jogador1jogar) return '<vermelho>o</vermelho>';
-}
-function ValidatePlayerTurn() {
-  if(jogador2jogar && !jogador1jogar) return '<azul>jogador 1 [X]</azul>';
-  else if(jogador1jogar && !jogador2jogar) return '<vermelho>jogador 2 [O]</vermelho>';
 }
